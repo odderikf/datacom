@@ -30,3 +30,18 @@
 *.exe
 *.out
 *.app
+
+# build artifacts:
+
+*/cmake-build-debug/
+*/cmake/
+
+# ide artifacts:
+
+*.idea
+
+
+# non-content:
+
+dump/
+
