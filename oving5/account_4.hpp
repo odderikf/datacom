@@ -25,7 +25,7 @@ private:
     #pragma db type("VARCHAR(100)")
     string _name;
 
-    unsigned long version = 0;
+    int version;
 
 public:
     const int &account_number() const{ return _account_number; }
@@ -34,7 +34,7 @@ public:
     const string &name() const{ return _name; }
     void name(const string &v) { _name=v; }
 
-    account(string name) : _name(name), _balance(0) {};
+    account(string name) : _name(name), _balance(0), version(0) {};
 };
 
 #endif //OVING5_ACCOUNT_HPP

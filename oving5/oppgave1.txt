@@ -1,0 +1,6 @@
+Optimistisk låsing (med versjonsnummer):
+Les fra db, inkludert versjonsnummeret
+gjør det du vil
+inkrementer versjonsnummer
+skriv endringer til DB om versjonsnummer fortsatt er likt
+ellers forkast endringer.
