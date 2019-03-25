@@ -12,20 +12,22 @@
 
 using std::string;
 
-#pragma db object
+#pragma db object optimistic
 class account{
 private:
     friend class odb::access;
-    account(){};
+    account(){}; //NOLINT(
 
     #pragma db id auto
     int _account_number;
 
+    #pragma db default(0)
     double _balance;
     #pragma db type("VARCHAR(100)")
     string _name;
 
-    unsigned long version = 0;
+    #pragma db version default(0)
+    unsigned long version;
 
 public:
     const int &account_number() const{ return _account_number; }
@@ -34,7 +36,8 @@ public:
     const string &name() const{ return _name; }
     void name(const string &v) { _name=v; }
 
-    account(string name) : _name(name), _balance(0) {};
+    account(const string &name) : _name(name){} explicit ;
 };
+
 
 #endif //OVING5_ACCOUNT_HPP

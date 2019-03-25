@@ -14,7 +14,6 @@ using std::string;
 int main() {
     odb::mysql::database db("test", "", "datacom5");
 
-
     odb::transaction t(db.begin());
 
     odb::result<account> r = db.query<account>(odb::query<account>::name == "john");
@@ -33,17 +32,32 @@ int main() {
     odb::transaction t2(db.begin());
 
     cout << "changing john" << endl;
-    john.balance( john.balance()+413.612 );
+    john.balance(john.balance() + 413.612);
     db.update(john);
+
+    t2.commit();
 
     cout << "waiting";
     cin >> waiter;
 
-    cout << "changing jane";
-    jane.balance(jane.balance() - 413.612);
-    db.update(jane);
+    try {
+        odb::transaction t2(db.begin());
 
-    t2.commit();
+        cout << "changing jane";
+        jane.balance(jane.balance() - 413.612);
+        db.update(jane);
+
+        t2.commit();
+    } catch (odb::object_changed &e) {
+        odb::transaction t2(db.begin());
+        odb::result<account> r3 = db.query<account>(odb::query<account>::account_number == john.account_number());
+        account john2 = *r3.begin();
+        john2.balance(john2.balance() - 413.612);
+        db.update(john2);
+        t2.commit();
+        throw e;
+    }
+
 
 
 }

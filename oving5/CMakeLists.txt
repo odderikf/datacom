@@ -28,3 +28,5 @@ target_include_directories(odbcmake
 target_compile_definitions(odbcmake
         PRIVATE
         DATABASE_SQLITE)
+
+target_compile_options(odbcmake PRIVATE -pthread -Wall -Wextra -pedantic -Werror -Wno-reorder -Wno-unused -Wno-unknown-pragmas)
