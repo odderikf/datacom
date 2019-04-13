@@ -23,7 +23,7 @@ class MathClient {
             if (!ec) {
                 auto read_buffer = std::make_shared<boost::asio::streambuf>();
                 // Read from client until newline ("\r\n")
-                async_read_until(*socket, *read_buffer, "\r\n", [this, socket, read_buffer](const boost::system::error_code &ec, size_t) {
+                boost::asio::async_read_until(*socket, *read_buffer, "\r\n", [this, socket, read_buffer](const boost::system::error_code &ec, size_t) {
                     // If not error:
                     if (!ec) {
                         std::string message;
@@ -70,5 +70,4 @@ public:
 
 int main() {
     MathClient("127.0.0.1", 8081);
-
 }

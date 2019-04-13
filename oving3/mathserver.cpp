@@ -72,7 +72,7 @@ class WebServer{
                 else write_stream << (isPlus ? a+b : a-b) << "\r\n";
 
                 // Write to client
-                async_write(*socket, *write_buffer, [this, socket, write_buffer](const boost::system::error_code &ec, size_t) {
+                boost::asio::async_write(*socket, *write_buffer, [this, socket, write_buffer](const boost::system::error_code &ec, size_t) {
                     // If not error:
                     if (!ec) {
                         std::cout << "server: reply sent to client" << std::endl;
