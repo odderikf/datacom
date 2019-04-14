@@ -5,8 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Etablerer websocket</h1>
+    <h2 style="background-color: lightgrey;width: 10em;height: 1.2em;" id="responsebox"></h2>
     <script>
-        let ws = new WebSocket('ws://localhost:8080/hello'); ws.onmessage = e => console.log(e.data);
+        let ws = new WebSocket('ws://localhost:8080/hello');
+        ws.onopen = e => console.log("open");
+        ws.onmessage = e => {
+            console.log(e.data);
+            document.getElementById("responsebox").innerText = e.data;
+        };
+        ws.onerror = e => {
+            document.getElementById("responsebox").innerText = "Failed";
+        }
     </script>
 </body>
 </html>
