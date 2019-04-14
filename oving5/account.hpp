@@ -16,7 +16,7 @@ using std::string;
 class account{
 private:
     friend class odb::access;
-    account(){}; //NOLINT(
+    account(){};
 
     #pragma db id auto
     int _account_number;
@@ -36,7 +36,7 @@ public:
     const string &name() const{ return _name; }
     void name(const string &v) { _name=v; }
 
-    account(const string &name) : _name(name){} explicit ;
+    account(const string &name) : _name(name){};
 };
 
 

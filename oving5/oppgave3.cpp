@@ -16,12 +16,8 @@ int main() {
 
     odb::transaction t(db.begin());
 
-    odb::result<account> r = db.query<account>(odb::query<account>::name == "john");
-    cout << r.size() << " results found for john" << endl;
-    account john = *r.begin();
-    odb::result<account> r2 = db.query<account>(odb::query<account>::name == "jane");
-    cout << r2.size() << " results found for jane" << endl;
-    account jane = *r2.begin();
+    account john = *db.query_one<account>(odb::query<account>::name == "john");
+    account jane = *db.query_one<account>(odb::query<account>::name == "jane");
 
     t.commit();
 
@@ -34,7 +30,6 @@ int main() {
     cout << "changing john" << endl;
     john.balance(john.balance() + 413.612);
     db.update(john);
-
     t2.commit();
 
     cout << "waiting";
