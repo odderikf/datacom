@@ -5,6 +5,7 @@
 #ifndef OVING1_MAIN_HPP
 #define OVING1_MAIN_HPP
 
+#include <cmath>
 #include <vector>
 #include <memory>
 
