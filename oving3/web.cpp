@@ -32,7 +32,7 @@ class WebServer{
                 auto write_buffer = std::make_shared<boost::asio::streambuf>();
                 std::ostream write_stream(write_buffer.get());
 
-                std::string response = "HTTP/1.1 200 OK\r\nconnection: keep-alive\r\n\r\n<html>\r\n<body>\r\n";
+                std::string response = "HTTP/1.1 200 OK\r\n\r\n<html>\r\n<body>\r\n";
                 response += "<h1>Velkommen</h1>\r\n";
                 response += "<ul>";
                 while(std::getline(read_stream, message)){
