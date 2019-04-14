@@ -100,7 +100,7 @@ class WebServer{
         write_stream << message;
 
 
-        async_write(*socket, *write_buffer, [=](const boost::system::error_code &ec, size_t) {
+        boost::asio::async_write(*socket, *write_buffer, [=](const boost::system::error_code &ec, size_t) {
             if (!ec) {
                 std::cout << "server: sent hello world to client" << std::endl;
                 listen_connection(socket);
@@ -183,7 +183,7 @@ class WebServer{
 
 
 
-                accept_key += "\r\n"; //because 162+8 is divisible by 24, so we're on the 8 special case
+                accept_key += "\r\n";
                 std::string handshake =
                         "HTTP/1.1 101 Switching Protocols\r\n"
                         "Upgrade: websocket\r\n"
